@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaccine Recommendation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f3f3;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: white;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #0046be;
+            text-align: center;
+            font-size: 24px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 15px;
+            width: 100%;
+            background-color: #0046be;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #003399;
+        }
+        .links, .schedule {
+            margin-top: 20px;
+            text-align: center;
+        }
+        a {
+            color: #0046be;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Vaccine Recommendation Questionnaire</h2>
+        
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" min="0" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="sex">Sex:</label>
+            <select id="sex">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        
+        <label>Medical Conditions:</label>
+        <div class="checkbox-group"><input type="checkbox" id="diabetes"> <label for="diabetes">Diabetes</label></div>
+        <div class="checkbox-group"><input type="checkbox" id="heart"> <label for="heart">Heart Disease</label></div>
+        <div class="checkbox-group"><input type="checkbox" id="lung"> <label for="lung">Chronic Lung Disease</label></div>
+        <div class="checkbox-group"><input type="checkbox" id="hiv"> <label for="hiv">HIV/AIDS</label></div>
+        <div class="checkbox-group"><input type="checkbox" id="cancer"> <label for="cancer">Cancer / Immunosuppressed</label></div>
+        
+        <label>Past Vaccines Received:</label>
+        <div class="checkbox-group"><input type="checkbox" id="flu"> <label for="flu">Influenza</label></div>
+        <div class="checkbox-group"><input type="checkbox" id="covid"> <label for="covid">COVID-19</label></div>
+        <div class="checkbox-group"><input type="checkbox" id="tdap"> <label for="tdap">Tdap / DTaP</label></div>
+        <div class="checkbox-group"><input type="checkbox" id="hepB"> <label for="hepB">Hepatitis B</label></div>
+        <div class="checkbox-group"><input type="checkbox" id="mmr"> <label for="mmr">MMR (Measles, Mumps, Rubella)</label></div>
+        
+        <button onclick="generateRecommendation()">Get Vaccine Recommendations</button>
+        
+        <div class="links">
+            <h3>Additional Resources:</h3>
+            <a href="https://www.cdc.gov/vaccines/?CDC_AAref_Val=https://www.cdc.gov/vaccines/schedules/" target="_blank">CDC Vaccine Schedule</a><br>
+            <button onclick="window.print()">Print Recommendations</button>
+        </div>
+        
+        <div class="schedule">
+            <h3>Schedule Your Vaccine</h3>
+            <p>To schedule a vaccine appointment, visit Kroger:</p>
+            <a href="https://www.kroger.com/health/schedule-appointment" target="_blank">Schedule a Vaccine at Kroger</a>
+        </div>
+    </div>
+    
+    <script>
+        function generateRecommendation() {
+            let age = document.getElementById("age").value;
+            let conditions = [];
+            if (document.getElementById("diabetes").checked) conditions.push("Diabetes");
+            if (document.getElementById("heart").checked) conditions.push("Heart Disease");
+            if (document.getElementById("lung").checked) conditions.push("Chronic Lung Disease");
+            if (document.getElementById("hiv").checked) conditions.push("HIV/AIDS");
+            if (document.getElementById("cancer").checked) conditions.push("Cancer / Immunosuppressed");
+            
+            let recommendationData = {
+                age: age,
+                conditions: conditions
+            };
+            
+            localStorage.setItem("recommendationData", JSON.stringify(recommendationData));
+            window.location.href = "recommendations.html";
+        }
+    </script>
+</body>
+</html>
