@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vaccine Recommendation</title>
+    <title>Vaccine Recommendation Form</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -42,15 +42,19 @@
             border: 1px solid #ccc;
             font-size: 16px;
         }
+
         .checkbox-group {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 10px;
+            margin-top: 10px;
         }
         .checkbox-group input {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-top: 17px;
         }
         button {
             margin-top: 20px;
@@ -79,16 +83,65 @@
         a:hover {
             text-decoration: underline;
         }
+
+        .label-medical {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .label-vaccines {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Vaccine Recommendation Questionnaire</h2>
-        
+        <h2>Vaccine Recommendation Form</h2>
+
         <div class="form-group">
             <label for="age">Age:</label>
-            <input type="number" id="age" min="0" required>
+            <select id="age">
+                <option value=">=65">≥65 years</option>
+                <option value="50-64">50-64 years</option>
+                <option value="27-49">27-49 years</option>
+                <option value="19-26">19-26 years</option>
+
+                <option value="18y">18 years</option>
+                <option value="17y">17 years</option>
+                <option value="16y">16 years</option>
+                <option value="15y">15 years</option>
+                <option value="14y">14 years</option>
+                <option value="13y">13 years</option>
+                <option value="12y">12 years</option>
+                <option value="11y">11 years</option>
+                <option value="10y">10 years</option>
+                <option value="9y">9 years</option>
+                <option value="8y">8 years</option>
+                <option value="7y">7 years</option>
+
+                <option value="4-6y">4-6 years</option>
+                <option value="2-3y">2-3 years</option>
+                <option value="20-23m">20-23 months</option>
+                <option value="19m">19 months</option>
+                <option value="18m">18 months</option>
+                <option value="15m">15 months</option>
+                <option value="12m">12 months</option>
+                <option value="8m">8 months</option>
+                <option value="7m">7 months</option>
+                <option value="6m">6 months</option>
+                <option value="4m">4 months</option>
+                <option value="2m">2 months</option>
+                <option value="1m">1 month</option>
+            </select>
         </div>
+
         
         <div class="form-group">
             <label for="sex">Sex:</label>
@@ -99,53 +152,80 @@
             </select>
         </div>
         
-        <label>Medical Conditions:</label>
-        <div class="checkbox-group"><input type="checkbox" id="diabetes"> <label for="diabetes">Diabetes</label></div>
-        <div class="checkbox-group"><input type="checkbox" id="heart"> <label for="heart">Heart Disease</label></div>
-        <div class="checkbox-group"><input type="checkbox" id="lung"> <label for="lung">Chronic Lung Disease</label></div>
-        <div class="checkbox-group"><input type="checkbox" id="hiv"> <label for="hiv">HIV/AIDS</label></div>
-        <div class="checkbox-group"><input type="checkbox" id="cancer"> <label for="cancer">Cancer / Immunosuppressed</label></div>
-        
-        <label>Past Vaccines Received:</label>
-        <div class="checkbox-group"><input type="checkbox" id="flu"> <label for="flu">Influenza</label></div>
-        <div class="checkbox-group"><input type="checkbox" id="covid"> <label for="covid">COVID-19</label></div>
-        <div class="checkbox-group"><input type="checkbox" id="tdap"> <label for="tdap">Tdap / DTaP</label></div>
-        <div class="checkbox-group"><input type="checkbox" id="hepB"> <label for="hepB">Hepatitis B</label></div>
-        <div class="checkbox-group"><input type="checkbox" id="mmr"> <label for="mmr">MMR (Measles, Mumps, Rubella)</label></div>
+        <label class="label-medical">Medical Conditions/Indications:</label>
+        <div class="checkbox-group"><input type="checkbox" id="diabetes"> <label for="diabetes">Diabetes</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="heart"> <label for="heart">Heart Disease</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="lung"> <label for="lung">Chronic Lung Disease</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="liver"> <label for="liver">Chronic Liver Disease</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="hiv"> <label for="hiv">HIV/AIDS</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="kidney"> <label for="kidney">Kidney Failure/ESRD/Dialysis</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="cancer"> <label for="cancer">Cancer/Immunosuppressed</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="pregnant"> <label for="pregnant">Pregnant</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="healthcare"> <label for="healthcare">Healthcare Personnel</label>
+        </div>
+
+        <label class="label-vaccines">Past Vaccines Received:</label>
+        <div class="checkbox-group"><input type="checkbox" id="covid"> <label for="covid">COVID-19</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="flu"> <label for="flu">Influenza</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="hepa"> <label for="hepa">Hepatitis A</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="hepB"> <label for="hepB">Hepatitis B</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="hpv"> <label for="hpv">HPV</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="meningococcal"> <label for="meningococcal">Meningococcal</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="mmr"> <label for="mmr">MMR (Measles, Mumps, Rubella)</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="mpox"> <label for="mpox"">Mpox</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="pertussis"> <label for="pertussis">Pertussis</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="pneumococcal"> <label for="pneumococcal">Pneumococcal</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="rabies"> <label for="rabies">Rabies</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="rotavirus"> <label for="rotavirus">Rotavirus</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="rsv"> <label for="rsv">RSV</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="shingles"> <label for="shingles">Shingles</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="tdap"> <label for="tdap">Tdap/DTaP</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="typhoid"> <label for="typhoid">Typhoid</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="varicella"> <label for="varicella">Varicella/Chickenpox</label>
+        </div>
+        <div class="checkbox-group"><input type="checkbox" id="yellow"> <label for="yellow">Yellow Fever</label>
+        </div>
         
         <button onclick="generateRecommendation()">Get Vaccine Recommendations</button>
         
         <div class="links">
             <h3>Additional Resources:</h3>
             <a href="https://www.cdc.gov/vaccines/?CDC_AAref_Val=https://www.cdc.gov/vaccines/schedules/" target="_blank">CDC Vaccine Schedule</a><br>
-            <button onclick="window.print()">Print Recommendations</button>
+        
+            <button onclick="printRecommendations()">Print Page</button>
+          
         </div>
         
         <div class="schedule">
-            <h3>Schedule Your Vaccine</h3>
-            <p>To schedule a vaccine appointment, visit Kroger:</p>
-            <a href="https://www.kroger.com/health/schedule-appointment" target="_blank">Schedule a Vaccine at Kroger</a>
+            <h3>To schedule your vaccine appointment, visit Kroger Pharmacy!</h3>
+            <a href="https://www.kroger.com/health/schedule-appointment" target="_blank">Schedule Your Vaccine Here</a>
         </div>
     </div>
-    
-    <script>
-        function generateRecommendation() {
-            let age = document.getElementById("age").value;
-            let conditions = [];
-            if (document.getElementById("diabetes").checked) conditions.push("Diabetes");
-            if (document.getElementById("heart").checked) conditions.push("Heart Disease");
-            if (document.getElementById("lung").checked) conditions.push("Chronic Lung Disease");
-            if (document.getElementById("hiv").checked) conditions.push("HIV/AIDS");
-            if (document.getElementById("cancer").checked) conditions.push("Cancer / Immunosuppressed");
-            
-            let recommendationData = {
-                age: age,
-                conditions: conditions
-            };
-            
-            localStorage.setItem("recommendationData", JSON.stringify(recommendationData));
-            window.location.href = "recommendations.html";
-        }
-    </script>
+
+    <script src="script.js"></script>
 </body>
 </html>
