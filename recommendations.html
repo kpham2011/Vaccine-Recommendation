@@ -33,7 +33,7 @@
             border-radius: 5px;
             font-size: 16px;
         }
-        .links {
+        .links, .schedule {
             margin-top: 20px;
             text-align: center;
         }
@@ -64,36 +64,43 @@
         <div class="links">
             <h3>Additional Resources:</h3>
             <a href="https://www.cdc.gov/vaccines/?CDC_AAref_Val=https://www.cdc.gov/vaccines/schedules/" target="_blank">CDC Vaccine Schedule</a><br>
-            <a href="index.html">Go Back to Questionnaire</a>
+            <a href="index.html">Go Back to Form</a>
+            <br><br>
+            <button onclick="printRecommendations()">Print Recommendations</button>
         </div>
         <div class="schedule">
-            <h3>Schedule Your Vaccine</h3>
-            <p>To schedule a vaccine appointment, visit Kroger:</p>
-            <a href="https://www.kroger.com/health/schedule-appointment" target="_blank">Schedule a Vaccine at Kroger</a>
+            <h3>To schedule your vaccine appointment, visit Kroger Pharmacy</h3>
+            <a href="https://www.kroger.com/health/schedule-appointment" target="_blank">Schedule Your Vaccine Here</a>
         </div>
     </div>
     
     <script>
         function getRecommendations() {
-            const params = new URLSearchParams(window.location.search);
-            let age = params.get("age");
-            let conditions = params.getAll("conditions");
-            let vaccines = params.getAll("vaccines");
-            
-            let recommendations = [];
-            
-            if (age >= 65) recommendations.push("Pneumococcal (PCV20 or PCV15 + PPSV23)");
-            if (!vaccines.includes("Influenza")) recommendations.push("Annual Influenza Vaccine");
-            if (!vaccines.includes("COVID-19")) recommendations.push("COVID-19 Vaccine");
-            if (!vaccines.includes("Tdap / DTaP")) recommendations.push("Tdap Booster (Every 10 years)");
-            if (conditions.includes("Diabetes") || conditions.includes("Liver Disease")) recommendations.push("Hepatitis B Vaccine");
-            if (!vaccines.includes("MMR (Measles, Mumps, Rubella)") && age < 50) recommendations.push("MMR Vaccine");
-            if (conditions.includes("HIV/AIDS") || conditions.includes("Cancer / Immunosuppressed")) recommendations.push("Avoid live vaccines like MMR, Varicella");
-            
-            document.getElementById("result").innerHTML = "<b>Recommended Vaccines:</b><br>" + (recommendations.length > 0 ? recommendations.join(", ") : "No additional vaccines needed");
+            let recommendationData = JSON.parse(localStorage.getItem("recommendationData"));
+
+            if (!recommendationData || !recommendationData.vaccines.length) {
+                document.getElementById("result").innerHTML = "No data available. Please complete the form.";
+                return;
+            }
+
+            let resultDiv = document.getElementById("result");
+
+            // Create a list of vaccines
+            let listHtml = "<b>Recommended Vaccines:</b><ul>";
+            recommendationData.vaccines.forEach(vaccine => {
+                listHtml += `<li>${vaccine}</li>`; // Add each vaccine as a list item
+            });
+            listHtml += "</ul>";
+
+            resultDiv.innerHTML = listHtml;
         }
-        
-        window.onload = getRecommendations;
+
+        // Call getRecommendations() on page load
+        window.onload = function () {
+            getRecommendations();
+        };
     </script>
+
+    <script src="script.js"></script>
 </body>
 </html>
